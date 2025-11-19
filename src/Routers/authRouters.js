@@ -21,7 +21,10 @@ authRouter.post("/signUp", async (req, res) => {
     });
     const saveData = await user.save();
     const token = await saveData.getJWT();
-    res.cookie("token", token);
+    res.cookie("token", token, {
+        secure: true,
+        sameSite: "None",
+    });
     res.status(201).send(saveData);
   } catch (err) {
     res.status(404).send(err.message);
@@ -39,8 +42,11 @@ authRouter.post("/signIn", async (req, res) => {
     if (!passwordCheck) {
       return res.send("Invalid Password");
     } else {
-      const token = user.getJWT();
-      res.cookie("token", token);
+      const token =await user.getJWT();
+      res.cookie("token", token, {
+        secure: true,
+        sameSite: "None",
+      });
       res.send("Login successful!!");
     }
   } catch (err) {
@@ -50,7 +56,10 @@ authRouter.post("/signIn", async (req, res) => {
 
 authRouter.post("/signOut", async(req,res) =>{
     try{
-        res.cookie("token", null).send("SignOut Successful!!")
+        res.cookie("token", null, {
+        secure: true,
+        sameSite: "None",
+        }).send("SignOut Successful!!")
     }catch(err){
         res.send(err.message)
     }

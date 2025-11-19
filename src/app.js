@@ -1,10 +1,15 @@
 const express = require("express")
 const dbConnect = require("./config/database")
 const authRouter = require("./Routers/authRouters")
+const profileRouters = require("./Routers/profileRouters")
+const cookieParser = require("cookie-parser")
 const app = express()
 
 app.use(express.json())
+app.use(cookieParser());
+
 app.use("/",authRouter)
+app.use("/",profileRouters)
 
 dbConnect()
     .then( () =>{
