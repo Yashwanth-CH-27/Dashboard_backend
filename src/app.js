@@ -1,8 +1,10 @@
 const express = require("express")
 const dbConnect = require("./config/database")
+const authRouter = require("./Routers/authRouters")
 const app = express()
 
 app.use(express.json())
+app.use("/",authRouter)
 
 dbConnect()
     .then( () =>{
