@@ -14,10 +14,13 @@ const userSchema = mongoose.Schema( {
     },
     emailID: {
         type: String,
-        unique: true
+        unique: true,
+        require: true
     },
     password: {
         type: String,
+        unique: true,
+        require: true
     },
     age: {
         type: Number,
