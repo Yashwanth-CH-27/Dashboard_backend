@@ -3,9 +3,12 @@ const dbConnect = require("./config/database")
 const authRouter = require("./Routers/authRouters")
 const profileRouters = require("./Routers/profileRouters")
 const cookieParser = require("cookie-parser")
+const cors = require("cors");
+require("dotenv").config()
 const app = express()
 
 app.use(express.json())
+app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
 app.use(cookieParser());
 
 
