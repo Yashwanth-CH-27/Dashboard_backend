@@ -36,11 +36,11 @@ authRouter.post("/signIn", async (req, res) => {
     const { emailID, password } = req.body;
     const user = await User.findOne({ emailID });
     if (!user) {
-      return res.send("Invalid credentials");
+      throw new Error("Invalid Credentials!")
     }
     const passwordCheck = await user.dehashPassword(password);
     if (!passwordCheck) {
-      return res.send("Invalid Password");
+      throw new Error("Invalid Password!")
     } else {
       const token =await user.getJWT();
       res.cookie("token", token, {
