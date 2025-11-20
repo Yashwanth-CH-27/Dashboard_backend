@@ -6,7 +6,7 @@ const userAuth = async (req,res,next) =>{
     try{
         const {token} = req.cookies
         if(!token){
-            return res.send("Please SignIn!")
+            return res.status(401).send("Please SignIn!");
         }
         const decodeToken = await jwt.verify(token, process.env.JWT_SECRET, {expiresIn: "3d"})
         const {_id} = decodeToken
