@@ -2,6 +2,7 @@ const express = require("express")
 const dbConnect = require("./config/database")
 const authRouter = require("./Routers/authRouters")
 const profileRouters = require("./Routers/profileRouters")
+const taskRoute = require("./Routers/taskRoute")
 const cookieParser = require("cookie-parser")
 const cors = require("cors");
 require("dotenv").config()
@@ -14,6 +15,7 @@ app.use(cookieParser());
 
 app.use("/",authRouter)
 app.use("/",profileRouters)
+app.use("/",taskRoute)
 
 const PORT = process.env.PORT || 3000;
 
